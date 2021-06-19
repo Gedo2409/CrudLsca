@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Auth::routes();
+
+//Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home.index']);
+
+
+require_once "backend_routes.php";
+require_once "frontend_routes.php";
+
