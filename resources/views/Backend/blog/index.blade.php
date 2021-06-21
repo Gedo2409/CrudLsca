@@ -22,7 +22,7 @@ Backend
 
         <div class="col-md-6 col-lg-4 col-xlg-3">
           <div class="card card-hover">
-            <a href="{{ route('carta.create') }}">
+            <a href="{{ route('blog.create') }}">
               <div class="box bg-success text-center">
                   <h3 class="text-white">Crear entrada</h3>
               </div>
@@ -32,7 +32,28 @@ Backend
 
 
       </div>
-    
+
+      <div class="container-fluid">
+   
+        <div class="row">
+          @foreach ($blogs as $c)
+          <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{$c->titulo}}</h5>
+                    <p>Lee el contenido de este post</p>
+                </div>
+                <center>
+
+                  <a href="{{ route('blog.show', $c->id) }}"> <button type="button" class="btn btn-primary waves-effect waves-light">Más información</button></a>
+                   </center> 
+            </div>
+            
+        </div>
+        @endforeach
+
+        </div>
+      </div>
    
 
   

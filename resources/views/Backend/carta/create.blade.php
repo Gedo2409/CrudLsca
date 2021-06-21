@@ -19,6 +19,7 @@ Backend
       </div>
     </div>
     <div class="row">
+
         <div class="col-md-6 col-lg-4 col-xlg-3">
           <div class="card card-hover">
             <a href="{{ route('carta.create') }}">
@@ -34,19 +35,14 @@ Backend
     
       <div class="col-md-6 col-lg-4 col-xlg-3">
         <div class="card card-hover">
+          <a href="{{ route('carta.index') }}">
             <div class="box bg-info text-center">
                 <h3 class="text-white">Consultar Platillo</h3>
             </div>
+          </a>
         </div>
     </div>
-
-    <div class="col-md-6 col-lg-4 col-xlg-3">
-        <div class="card card-hover">
-            <div class="box bg-danger text-center">
-                <h3 class="text-white">Eliminar Platillo</h3>
-            </div>
-        </div>
-    </div>
+ 
 
 
 
@@ -55,60 +51,64 @@ Backend
       <div class="row">
           
         <div class="card">
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="{{ route('carta.store') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
                 <div class="card-body">
-                    <h4 class="card-title">Personal Info</h4>
+                    <h4 class="card-title">Información del platillo</h4>
                     <div class="form-group row">
                         <label for="fname"
-                            class="col-sm-3 text-end control-label col-form-label">First Name</label>
+                            class="col-sm-3 text-end control-label col-form-label">nombre del producto</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fname"
-                                placeholder="First Name Here">
+                            <input name="nombre" type="text" class="form-control"  value="{{ old('nombre') }}" 
+                                placeholder="nombre">
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Last
-                            Name</label>
+                        <label for="cono1"
+                            class="col-sm-3 text-end control-label col-form-label">Tipo de alimento</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="lname"
-                                placeholder="Last Name Here">
+                            <input name="categoria"  placeholder="Alimento o Bebida (escriba la primera letra en mayuscula)" type="text" class="form-control"  value="{{ old('categoria') }}">
                         </div>
                     </div>
+
+                    <!--
                     <div class="form-group row">
-                        <label for="lname"
-                            class="col-sm-3 text-end control-label col-form-label">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="lname"
-                                placeholder="Password Here">
+                        <label class="col-sm-3 text-end control-label col-form-label">Tipo de producto</label>
+                        <div class="col-md-9">
+                            <select  class="select2 form-select shadow-none"
+                                style="width: 100%; height:36px;">
+                                
+                                <optgroup label="Seleccione una opcion">
+                                    <option name="categoria" type="text" class="form-control"  value="{{ old('categoria') }}" >Alimentos</option>
+                                    <option name="categoria" type="text" class="form-control"  value="{{ old('categoria') }}" >Bebidas</option>
+                                </optgroup>
+                             
+                            </select>
                         </div>
                     </div>
+                -->
+                    
                     <div class="form-group row">
-                        <label for="email1"
-                            class="col-sm-3 text-end control-label col-form-label">Company</label>
+                        <label for="cono1"
+                            class="col-sm-3 text-end control-label col-form-label">Precio</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="email1"
-                                placeholder="Company Name Here">
+                            <input name="precio" type="text" class="form-control"  value="{{ old('precio') }}" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1"
-                            class="col-sm-3 text-end control-label col-form-label">Contact No</label>
+                            class="col-sm-3 text-end control-label col-form-label">Descripción</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="cono1"
-                                placeholder="Contact No Here">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cono1"
-                            class="col-sm-3 text-end control-label col-form-label">Message</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control"></textarea>
+                            <textarea name="descripcion" type="text" class="form-control"  value="{{ old('descripcion') }}" ></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="border-top">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-primary">Submit</button>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="payment-adress">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">REGISTRAR Empleado</button>
+                        </div>
                     </div>
                 </div>
             </form>

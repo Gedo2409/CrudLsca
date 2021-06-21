@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use App\Blog;
+use App\Empleado;
 
 
-class BlogController extends Controller
+class EmpleadosController extends Controller
 {
+
+    public function __construct()
+	{
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +25,11 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('backend.blog.index',['blogs'=>Blog::all()]);
+        return view('backend.colaboradores.index',['empleados'=>Empleado::all()]);
+        
     }
+
+   
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +38,9 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('backend.blog.create');
+        
+       
+        return view('backend.colaboradores.create');
     }
 
     /**
@@ -41,29 +51,30 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+
          
 		$input = $request->all();
 		//dd( $input );
-        $rules = [
+
+		$rules = [
 			//'Foto' => 'mimes:jpeg,png,jpg',// max 150kb
-			'titulo' => 'required'
+			'nombre' => 'required'
 		
 			//hacer validacion para tipo de datos
 
 		];
-	
 		$validator = Validator::make($input, $rules);
 		if ($validator->fails()) {
 			return redirect()->back()
 			->withErrors($validator)
 			->withInput();
 		} else {
-			$b = new Blog($input);
+			$b = new Empleado($input);
 			$b->save();
 		}
 		 
-		return view('backend.blog.index',['blogs'=> Blog::all()]);	
-    }
+		return view('backend.colaboradores.index',['empleados'=> Empleado::all()]);	
+	}
 
     /**
      * Display the specified resource.
@@ -73,7 +84,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        return view('backend.blog.show', ['blogs' => Blog::find($id)]);
+        
     }
 
     /**
@@ -84,7 +95,7 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.blog.edit', ['blogs' => Blog::find($id)]);
+        return view('backend.colaboradores.edit', ['empleados' => Empleado::find($id)]);
     }
 
     /**
@@ -101,7 +112,7 @@ class BlogController extends Controller
 		//dd($input);
 		//dd($input);
 		$rules = [
-			'titulo' => 'required'
+			'nombre' => 'required'
 		];
 
 
@@ -111,12 +122,12 @@ class BlogController extends Controller
 			->withErrors($validator)
 			->withInput();
 		} else {
-			$p = Blog::find($id);
+			$p = Empleado::find($id);
 			$p->update($input);
 			//dd($p->hyperlink);
 			$p->save();
         }
-		return view('backend.blog.edit', ['blogs' => Blog::find($id)]);
+		return view('backend.colaboradores.edit', ['empleados' => Empleado::find($id)]);
     }
 
     /**
@@ -127,8 +138,8 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        $b = Blog::find($id);
+        $b = Empleado::find($id);
 		$b->delete();
-		return view('backend.blog.index',['blogs'=>Blog::all()]);
+		return view('backend.colaboradores.index',['empleados'=>Empleado::all()]);
     }
 }
